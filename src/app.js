@@ -12,6 +12,8 @@ import client from "./routes/client.routes.js"
 
 import { sequelize } from "./db/config.js"
 
+import logger from "./utils/logger.js"
+
 // Inicializo la aplicación
 const app = express()
 
@@ -20,7 +22,7 @@ try {
   await sequelize.authenticate()
   console.log('Connection has been established successfully.')
 } catch (error) {
-  console.error('Unable to connect to the database:', error)
+  logger.error('Unable to connect to the database:', error)
 }
 
 // Configuro el puerto
