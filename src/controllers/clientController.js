@@ -1,10 +1,23 @@
-
+import {Client} from '../db/models/client.js'
 
 const controller = {
     getAll: async (req, res) => {
         let searchString = req.query.string
+        try{
+            const clients = await Client.findAll()
+            res.status(200)
+                .json({
+                    searchString: searchString,
+                    clients: clients
+                })
+        }
+        catch(error){
+            res.status(500)
+                .json({
+                    error: error
+                })
+        }
 
-        res.json({ message: "getAll", searchString: searchString })
     },
     getById: async (req, res) => {
         let id = req.params.id
