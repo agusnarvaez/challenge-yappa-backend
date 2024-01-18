@@ -69,23 +69,9 @@
                 "parameters":
                 [
                     {
-                        "name": "name",
+                        "name": "search",
                         "in": "query",
-                        "description": "Nombre del cliente",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "last_name",
-                        "in": "query",
-                        "description": "Apellido del cliente",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "cuit",
-                        "in": "query",
-                        "description": "CUIT del cliente",
+                        "description": "Busca por nombre, apellido o cuit",
                         "required": false,
                         "type": "string"
                     }
