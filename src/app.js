@@ -10,8 +10,18 @@ import cors from "cors"
 // ##### Importo rutas de la API #####
 import client from "./routes/client.routes.js"
 
+import { sequelize } from "./db/config.js"
+
 // Inicializo la aplicación
 const app = express()
+
+// Pruebo conexión a la base de datos
+try {
+  await sequelize.authenticate();
+  console.log('Connection has been established successfully.')
+} catch (error) {
+  console.error('Unable to connect to the database:', error)
+}
 
 // Configuro el puerto
 app.set('port',process.env.PORT || 3000)
