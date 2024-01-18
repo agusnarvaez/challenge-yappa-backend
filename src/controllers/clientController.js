@@ -5,41 +5,43 @@ import {Op} from 'sequelize'
 import logger from '../utils/logger.js'
 const controller = {
     getAll: async (req, res) => {
-        let name = req.query.name
-        let last_name = req.query.last_name
-        let cuit = req.query.cuit
-        try{
-            let queryOptions = {}
-            if (name) queryOptions.where = {
-                name: {
-                    [Op.like]: `%${name}%`,
-                }
-            }
-            if (last_name) queryOptions.where = {
-                ...queryOptions.where,
-                last_name: {
-                    [Op.like]: `%${last_name}%`,
-                }
-            }
-            if (cuit) queryOptions.where = {
-                ...queryOptions.where,
-                cuit: {
-                    [Op.like]: `%${cuit}%`,
-                }
+        let search = req.query.search;
+        try {
+            let queryOptions = {};
+            if (search) {
+                queryOptions.where = {
+                    [Op.or]: [
+                        {
+                            name: {
+                                [Op.like]: `%${search}%`
+                            }
+                        },
+                        {
+                            last_name: {
+                                [Op.like]: `%${search}%`
+                            }
+                        },
+                        {
+                            cuit: {
+                                [Op.like]: `%${search}%`
+                            }
+                        }
+                    ]
+                };
             }
 
-            const clients = await Client.findAll(queryOptions)
+            const clients = await Client.findAll(queryOptions);
 
             if (clients.length == 0){
                 return res.status(404).json({
                     message: "No se encontraron clientes"
-                })
+                });
             }
 
             return res.status(200).json({
                 message: "Operación exitosa",
                 data: clients
-            })
+            });
         }
         catch(error){
             const errorDetails = {
