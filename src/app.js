@@ -10,12 +10,28 @@ import cors from "cors"
 // ##### Importo rutas de la API #####
 import client from "./routes/client.routes.js"
 
+// Importo la conexión a la base de datos
 import { sequelize } from "./db/config.js"
 
+// Importo el logger
 import logger from "./utils/logger.js"
 
+// Importo el módulo de fs para trabajar con el sistema de archivos
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+// Importo swagger para documentar
+import swaggerUI from "swagger-ui-express"
+/* const swaggerDocument = require('./swagger.json') */
 // Inicializo la aplicación
 const app = express()
+
+// Leo el archivo JSON y lo parseo
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const swaggerFilePath = path.join(__dirname, './swagger.json')
+const swaggerFile = fs.readFileSync(swaggerFilePath, 'utf8')
+const swaggerDocument = JSON.parse(swaggerFile)
 
 // Pruebo conexión a la base de datos
 try {
@@ -40,6 +56,9 @@ app.use(morgan('dev')) // Mensaje formateado como dev
 app.use(express.json()) // Para que el servidor entienda json
 
 // Rutas de la API
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use('/client',client)
+
+console.log("La documentación de la API está disponible en la ruta /api-docs")
 
 export default app
