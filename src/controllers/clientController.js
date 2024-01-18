@@ -37,8 +37,8 @@ const controller = {
             }
 
             return res.status(200).json({
-                searchString: name,
-                clients: clients
+                message: "Operación exitosa",
+                data: clients
             })
         }
         catch(error){
@@ -67,8 +67,8 @@ const controller = {
 
             return res.status(200)
                 .json({
-                    id: id,
-                    client: client
+                    message: "Operación exitosa",
+                    data: client
                 })
         }
         catch(error){
@@ -86,7 +86,6 @@ const controller = {
     },
     insert: async (req, res) => {
         let {
-/*             id, */
             name,
             last_name,
             birth_date,
@@ -107,7 +106,9 @@ const controller = {
                 phone_number: phone_number,
                 email: email
             })
-            return res.status(201).json({ client: client })
+            return res.status(201).json({
+                message: "Cliente creado",
+                data: client })
 
         } catch (error) {
             const errorDetails = {
@@ -119,7 +120,7 @@ const controller = {
             }
             console.error("Error details:", errorDetails) // Registra los detalles del error
             logger.error(errorDetails)
-            return res.status(500).json({ error: error })
+            return res.status(500).json({ message: "Ocurrió un error interno en el servidor"})
         }
     },
     update: async (req, res) => {
@@ -138,7 +139,7 @@ const controller = {
             // Verifica si existe el cliente
             const client = await Client.findByPk(id)
             if (!client) {
-                return res.status(404).json({ message: `El cliente con ID ${id} no existe` })
+                return res.status(404).json({ message: `El cliente con ID ${id} no se encontró` })
             }
             // Actualiza el cliente solo los datos que se envían
             await client.update({
@@ -152,7 +153,7 @@ const controller = {
             })
             return res.status(200).json({
                 message: "Cliente actualizado",
-                client: client
+                data: client
             })
 
         } catch (error) {
@@ -176,11 +177,11 @@ const controller = {
             // Verifica si existe el cliente
             const client = await Client.findByPk(id)
             if (!client) {
-                return res.status(404).json({ message: `El cliente con ID ${id} no existe` })
+                return res.status(404).json({ message: `El cliente con ID ${id} no se encontró` })
             }
             // Elimina el cliente
             await client.destroy()
-            return res.status(200).json({ message: "Cliente eliminado" })
+            return res.status(200).json({ message: `Cliente con ID ${id} eliminado` })
         }
         catch(error){
             const errorDetails = {
