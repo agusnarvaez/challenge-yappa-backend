@@ -1,0 +1,273 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Resolución del challenge de Yappa",
+        "version": "1.0.0",
+        "title": "Yappa Backend Challenge",
+        "contact":{
+            "name": "Agustín Narvaez",
+            "email": "agus.narvaez@outlook.com",
+            "phone": "+54 9 11 6103 7090",
+            "linkedin": "https://www.linkedin.com/in/agusnarvaez/",
+            "github": "https://github.com/agusnarvaez"
+        }
+    },
+    "scheme": "http://localhost:3000/client",
+    "host": "localhost:3000",
+    "definitions":
+    {
+        "Client":
+        {
+            "type": "object",
+            "properties":
+            {
+
+                "name":
+                {
+                    "type": "string"
+                },
+                "last_name":
+                {
+                    "type": "string"
+                },
+                "birth_date":
+                {
+                    "type": "string",
+                    "format": "date"
+                },
+                "cuit":
+                {
+                    "type": "string"
+                },
+                "address":
+                {
+                    "type": "string"
+                },
+                "phone_number":
+                {
+                    "type": "string"
+                },
+                "email":
+                {
+                    "type": "string",
+                    "format": "email"
+                }
+            }
+        }
+    },
+    "paths":
+    {
+        "/client":
+        {
+            "get":
+            {
+                "tags": ["Client"],
+                "summary": "Obtiene todos los clientes o los buscados",
+                "description": "Obtiene todos los clientes y permite filtrar con query string por nombre (name), apellido (last_name) o cuit (cuit)",
+                "operationId": "getAllClients",
+                "produces": ["application/json"],
+                "parameters":
+                [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nombre del cliente",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "query",
+                        "description": "Apellido del cliente",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "cuit",
+                        "in": "query",
+                        "description": "CUIT del cliente",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "message": "Operación exitosa",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Client"
+                        }
+                    },
+                    "404":
+                    {
+                        "message": "No se encontraron clientes"
+                    },
+                    "500":
+                    {
+                        "message": "Ocurrió un error interno en el servidor"
+                    }
+                }
+            },
+            "post":
+            {
+                "tags": ["Client"],
+                "summary": "Crea un cliente",
+                "description": "Crea un cliente",
+                "operationId": "insertClient",
+                "produces": ["application/json"],
+                "parameters":[
+                    {
+                        "name": "client",
+                        "in": "body",
+                        "description": "Cliente a crear",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "message": "Cliente creado",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Client"
+                        }
+                    },
+                    "500":
+                    {
+                        "message": "Ocurrió un error interno en el servidor"
+                    }
+                }
+            }
+        },
+        "/client/{id}":
+        {
+            "get":{
+                "tags": ["Client"],
+                "summary": "Obtiene un cliente por id",
+                "description": "Obtiene un cliente por id",
+                "operationId": "getClientById",
+                "produces": ["application/json"],
+                "parameters":
+                [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del cliente",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "message": "Operación exitosa",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Client"
+                        }
+                    },
+                    "404":
+                    {
+                        "message": "No se encontró el cliente"
+                    },
+                    "500":
+                    {
+                        "message": "Ocurrió un error interno en el servidor"
+                    }
+                }
+            },
+            "patch":
+            {
+                "tags": ["Client"],
+                "summary": "Actualiza un cliente",
+                "description": "Actualiza un cliente",
+                "operationId": "updateClient",
+                "produces": ["application/json"],
+                "parameters":
+                [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del cliente",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "client",
+                        "in": "body",
+                        "description": "Cliente a actualizar",
+                        "required": true,
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Client"
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "message": "Cliente actualizado",
+                        "schema":
+                        {
+                            "$ref": "#/definitions/Client"
+                        }
+                    },
+                    "404":
+                    {
+                        "message": "El cliente con ID {id} no se encontró"
+                    },
+                    "500":
+                    {
+                        "message": "Ocurrió un error interno en el servidor"
+                    }
+                }
+            },
+            "delete":
+            {
+                "tags": ["Client"],
+                "summary": "Elimina un cliente",
+                "description": "Elimina un cliente",
+                "operationId": "deleteClient",
+                "produces": ["application/json"],
+                "parameters":
+                [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del cliente",
+                        "required": true,
+                        "type": "number",
+                        "format": "integer"
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "message": "Cliente con ID {id} eliminado"
+                    },
+                    "404":
+                    {
+                        "message": "El cliente con ID {id} no se encontró"
+                    },
+                    "500":
+                    {
+                        "message": "Ocurrió un error interno en el servidor"
+                    }
+                }
+            }
+        }
+    }
+
+}
