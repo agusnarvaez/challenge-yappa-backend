@@ -26,11 +26,11 @@ export const validateCreate = [
         .not().isEmpty().bail().withMessage("El campo birth_date no debe estar vacío")
         .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("El campo birth_date debe tener el formato yyyy-mm-dd")
         .custom((value) => {
-            const date = new Date(value);
+            const date = new Date(value)
             if (isNaN(date.getTime())) {
-                throw new Error("El campo birth_date debe ser una fecha válida");
+                throw new Error("El campo birth_date debe ser una fecha válida")
             }
-            return true;
+            return true
         }),
     check("cuit")
         .exists().bail().withMessage("El campo cuit no existe")
@@ -71,11 +71,11 @@ export const validateUpdate = [
         .not().isEmpty().bail().withMessage("El campo birth_date no debe estar vacío")
         .matches(/^\d{4}-\d{2}-\d{2}$/).withMessage("El campo birth_date debe tener el formato yyyy-mm-dd")
         .custom((value) => {
-            const date = new Date(value);
+            const date = new Date(value)
             if (isNaN(date.getTime())) {
-                throw new Error("El campo birth_date debe ser una fecha válida");
+                throw new Error("El campo birth_date debe ser una fecha válida")
             }
-            return true;
+            return true
         }),
     check("cuit")
         .optional({nullable: true})

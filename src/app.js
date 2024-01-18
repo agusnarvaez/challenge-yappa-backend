@@ -17,7 +17,7 @@ const app = express()
 
 // Pruebo conexión a la base de datos
 try {
-  await sequelize.authenticate();
+  await sequelize.authenticate()
   console.log('Connection has been established successfully.')
 } catch (error) {
   console.error('Unable to connect to the database:', error)
