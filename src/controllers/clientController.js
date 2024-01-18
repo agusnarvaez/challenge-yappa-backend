@@ -2,7 +2,7 @@ import { query } from 'express'
 import {Client} from '../db/models/client.js'
 
 import {Op} from 'sequelize'
-
+import logger from '../utils/logger.js'
 const controller = {
     getAll: async (req, res) => {
         let name = req.query.name
@@ -49,6 +49,7 @@ const controller = {
                 errorMessage: error.message          // Mensaje de error
             }
             console.error("Error details:", errorDetails) // Registra los detalles del error
+            logger.error(errorDetails)
             return res.status(500).json({ message: "Ocurrió un error interno en el servidor"})
         }
     },
@@ -79,35 +80,10 @@ const controller = {
                 errorMessage: error.message          // Mensaje de error
             }
             console.error("Error details:", errorDetails) // Registra los detalles del error
+            logger.error(errorDetails)
             return res.status(500).json({ message: "Ocurrió un error interno en el servidor"})
         }
-
     },
-    /* search: async (req, res) => {
-
-        let name = req.params.name
-
-        try{
-            const clients = await Client.findAll({
-                where: {
-                    name: name
-                }
-            })
-
-            return res.status(200)
-                .json({
-                    name: name,
-                    clients: clients
-                })
-        }
-        catch(error){
-            return res.status(500)
-                .json({
-                    error: error
-                })
-        }
-
-    }, */
     insert: async (req, res) => {
         let {
 /*             id, */
@@ -142,6 +118,7 @@ const controller = {
                 errorMessage: error.message          // Mensaje de error
             }
             console.error("Error details:", errorDetails) // Registra los detalles del error
+            logger.error(errorDetails)
             return res.status(500).json({ error: error })
         }
     },
@@ -188,6 +165,7 @@ const controller = {
                 errorMessage: error.message          // Mensaje de error
             }
             console.error("Error details:", errorDetails) // Registra los detalles del error
+            logger.error(errorDetails)
             return res.status(500).json({ message: "Ocurrió un error interno en el servidor"})
         }
     },
@@ -213,6 +191,7 @@ const controller = {
                 errorMessage: error.message          // Mensaje de error
             }
             console.error("Error details:", errorDetails) // Registra los detalles del error
+            logger.error(errorDetails)
             return res.status(500).json({ message: "Ocurrió un error interno en el servidor"})
         }
     }
