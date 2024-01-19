@@ -1,3 +1,8 @@
+#Prod
+Dockerfile
+fly.toml
+.dockerignore
+
 # Logs
 logs
 *.log
