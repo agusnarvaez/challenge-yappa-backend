@@ -46,7 +46,7 @@ app.set('port',process.env.PORT || 3000)
 
 // Para que el servidor entienda cors
 app.use(cors({
-  origin: ['http://localhost:3000','http://localhost:5173','http://localhost:4200'],
+  origin: ['http://localhost:5173','https://yappa-challenge-api.bapps.com.ar'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
 }))
