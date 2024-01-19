@@ -28,28 +28,30 @@ import swaggerUI from "swagger-ui-express"
 const app = express()
 
 // Leo el archivo JSON y lo parseo
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const swaggerFilePath = path.join(__dirname, './swagger.json')
 const swaggerFile = fs.readFileSync(swaggerFilePath, 'utf8')
 const swaggerDocument = JSON.parse(swaggerFile)
 
 // Pruebo conexión a la base de datos
 try {
+  console.log(sequelize.config)
   await sequelize.authenticate()
   console.log('Connection has been established successfully.')
 } catch (error) {
-  logger.error('Unable to connect to the database:', error)
+  console.error('Unable to connect to the database:', error)
 }
 
 // Configuro el puerto
 app.set('port',process.env.PORT || 3000)
 
-// Para que el servidor entienda cors
-app.use(cors({
+// Para que el servidor entienda cors de cualquier origen
+/* app.use(cors({
   origin: ['http://localhost:5173','https://yappa-challenge-api.bapps.com.ar'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization']
-}))
+})) */
+app.use(cors())
 
 app.options('*', cors())
 app.use(morgan('dev')) // Mensaje formateado como dev
