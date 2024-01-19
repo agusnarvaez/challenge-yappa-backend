@@ -2,7 +2,8 @@
 Dockerfile
 fly.toml
 .dockerignore
-
+ssl/
+src/db/ssl/
 # Logs
 logs
 *.log
