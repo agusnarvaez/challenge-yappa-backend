@@ -58,6 +58,10 @@ app.use(morgan('dev')) // Mensaje formateado como dev
 app.use(express.json()) // Para que el servidor entienda json
 
 // Rutas de la API
+// Redirige desde la ruta raíz a /api-docs
+app.get('/', (req, res) => {
+  res.redirect('/api-docs')
+})
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use('/client',client)
 

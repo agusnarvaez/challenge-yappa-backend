@@ -5,9 +5,9 @@ import {Op} from 'sequelize'
 import logger from '../utils/logger.js'
 const controller = {
     getAll: async (req, res) => {
-        let search = req.query.search;
+        let search = req.query.search
         try {
-            let queryOptions = {};
+            let queryOptions = {}
             if (search) {
                 queryOptions.where = {
                     [Op.or]: [
@@ -27,21 +27,21 @@ const controller = {
                             }
                         }
                     ]
-                };
+                }
             }
 
-            const clients = await Client.findAll(queryOptions);
+            const clients = await Client.findAll(queryOptions)
 
             if (clients.length == 0){
                 return res.status(404).json({
                     message: "No se encontraron clientes"
-                });
+                })
             }
 
             return res.status(200).json({
                 message: "Operación exitosa",
                 data: clients
-            });
+            })
         }
         catch(error){
             const errorDetails = {
