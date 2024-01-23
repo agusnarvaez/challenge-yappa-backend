@@ -12,8 +12,8 @@
             "github": "https://github.com/agusnarvaez"
         }
     },
-    "scheme": "http://localhost:3000/client",
-    "host": "localhost:3000",
+    "scheme": "https://challenge-yappa-backend.fly.dev/client",
+    "host": "challenge-yappa-backend.fly.dev",
     "definitions":
     {
         "Client":
