@@ -2,7 +2,7 @@
 Este repositorio contiene la resolución al challenge de backend de Yappa
 
 ## Host de la API
-La API se encuentra hosteada en fly.io en la siguiente URL: https://challenge-yappa-backend.fly.dev
+La API se encuentra hosteada en fly.io en la siguiente URL: [challenge-yappa-backend.fly.dev](https://challenge-yappa-backend.fly.dev)
 
 ## Tecnologías utilizadas
 - NodeJS
