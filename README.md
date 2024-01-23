@@ -1,6 +1,20 @@
 # challenge-yappa-backend
 Este repositorio contiene la resolución al challenge de backend de Yappa
 
+## Host de la API
+La API se encuentra hosteada en fly.io en la siguiente URL: https://challenge-yappa-backend.fly.dev
+
+## Tecnologías utilizadas
+- NodeJS
+- Express
+- MySQL
+- Sequelize
+- Swagger
+- Nodemon
+- Dotenv
+- Cors
+- Body-parser
+
 ## Requerimientos
 - Node
 - NPM
